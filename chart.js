@@ -147,51 +147,46 @@ function buildCharts(sample) {
 
 
 // Build Gauge Chart
-function buildCharts(sample) {
-  // Use d3.json to load the samples.json file 
-  d3.json("samples.json").then((data) => {
-    console.log(data);
+    var samples = data.samples;
 
-var samples = data.samples;
+    var gaugeArray = samples.filter(sampleObj => sampleObj.id == sample);
 
-var gaugeArray = samples.filter(sampleObj => sampleObj.id == sample);
+    var gaugeResult = gaugeArray[0];
 
-var gaugeResult = gaugeArray[0];
-
-var wfreqs = gaugeResult.wfreqs;
-console.log(wfreqs)
+    var wfreqs = gaugeResult.wfreqs;
+    console.log(wfreqs)
 
 
-var gaugeData = [
-  {
-    value: wfreqs,
+    var gaugeData = [
+      {
+        value: wfreqs,
 
-    type: "indictor",
+        type: "indictor",
 
-    mode: "gauge+number",
+        mode: "gauge+number",
 
-    title: {text: "<b> Belly Button Washing Frequency </b> <br></br> Scrubs Per Week"},
+        title: {text: "<b> Belly Button Washing Frequency </b> <br></br> Scrubs Per Week"},
 
-    gauge: {
-      axis: {range: [null, 10], dtick: "2"},
+        gauge: {
+          axis: {range: [null, 10], dtick: "2"},
 
-      bar: {color: "black"},
+          bar: {color: "black"},
 
-      step: [
-        {range: [0, 2], color: "red"},
-        {range: [2, 4], color: "orange"},
-        {range: [4, 6], color: "yellow"},
-        {range: [6, 8], color: "lightgreen"},
-        {range: [8, 18], color: "green"}
-      ],
-      dtick: 2
-    }
-  }];
+          step: [
+            {range: [0, 2], color: "red"},
+            {range: [2, 4], color: "orange"},
+            {range: [4, 6], color: "yellow"},
+            {range: [6, 8], color: "lightgreen"},
+            {range: [8, 18], color: "green"}
+          ],
+          dtick: 2
+        }
+      }];
 
-  var gaugeLayout = {
-    automargin: true
-  };
+      var gaugeLayout = {
+        automargin: true
+      };
 
-  Plotly.newPlot("gauge", gaugeData, gaugeLayout)
+      Plotly.newPlot("gauge", gaugeData, gaugeLayout)
 
-}
+};
