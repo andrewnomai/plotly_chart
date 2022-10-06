@@ -143,50 +143,52 @@ function buildCharts(sample) {
     
     Plotly.newPlot("bar", barData, barLayout);
 
-  });
-
 
 // Build Gauge Chart
-    var samples = data.samples;
+var  metadata = data.metadata;
 
-    var gaugeArray = samples.filter(sampleObj => sampleObj.id == sample);
+var gaugeArray = metadata.filter(sampleObj => sampleObj.id == sample);
 
-    var gaugeResult = gaugeArray[0];
+var gaugeResult = gaugeArray[0];
 
-    var wfreqs = gaugeResult.wfreqs;
-    console.log(wfreqs)
+var wfreq = gaugeResult.wfreq;
 
 
-    var gaugeData = [
-      {
-        value: wfreqs,
 
-        type: "indictor",
+var gaugeData = [
+  {
+    value: wfreq,
 
-        mode: "gauge+number",
+    type: "indicator",
 
-        title: {text: "<b> Belly Button Washing Frequency </b> <br></br> Scrubs Per Week"},
+    mode: "gauge+number+delta",
 
-        gauge: {
-          axis: {range: [null, 10], dtick: "2"},
+    title: {text: "<b> Belly Button Washing Frequency </b> <br></br> Scrubs Per Week"},
 
-          bar: {color: "black"},
+    gauge: {
+      axis: {range: [null, 10], dtick: "2"},
 
-          step: [
-            {range: [0, 2], color: "red"},
-            {range: [2, 4], color: "orange"},
-            {range: [4, 6], color: "yellow"},
-            {range: [6, 8], color: "lightgreen"},
-            {range: [8, 18], color: "green"}
-          ],
-          dtick: 2
-        }
-      }];
+      bar: {color: "black"},
 
-      var gaugeLayout = {
-        automargin: true
-      };
+      steps: [
+        {range: [0, 2], color: "red"},
+        {range: [2, 4], color: "orange"},
+        {range: [4, 6], color: "yellow"},
+        {range: [6, 8], color: "lightgreen"},
+        {range: [8, 18], color: "green"}
+      ],
+      dticks: 2
+    }
+  }];
 
-      Plotly.newPlot("gauge", gaugeData, gaugeLayout)
+  var gaugeLayout = {
+    automargin: true
+  };
 
-};
+  Plotly.newPlot("gauge", gaugeData, gaugeLayout)
+
+  }
+  
+  
+  
+  )};
